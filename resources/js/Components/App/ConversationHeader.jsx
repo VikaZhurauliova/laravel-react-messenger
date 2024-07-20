@@ -23,7 +23,7 @@ const ConversationHeader = ({selectedConversation}) => {
                             <h3>{selectedConversation.name}</h3>
                             {selectedConversation.is_group && (
                                 <p className="text-xs text-gray-500">
-                                    {selectedConversation.user.length} members
+                                    {selectedConversation.users.length} members
                                 </p>
                             )}
                         </div>
