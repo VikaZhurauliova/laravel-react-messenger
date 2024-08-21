@@ -10,12 +10,14 @@ function Home({ selectedConversation = null, messages = null }) {
     const [localMessages, setLocalMessages] = useState([]);
     const messagesCtrRef = useRef(null);
 
-    const scrollToBottom = () => {
-        if (messagesCtrRef.current) {
-            messagesCtrRef.current.scrollTop =
-                messagesCtrRef.current.scrollHeight;
-        }
-    };
+    useEffect(() => {
+        setTimeout(() => {
+            if (messagesCtrRef.current) {
+                messagesCtrRef.current.scrollTop =
+                    messagesCtrRef.current.scrollHeight;
+            }
+        }, 10);
+    }, [selectedConversation]);
 
     useEffect(() => {
         setLocalMessages(messages ? messages.data.reverse() : []);
