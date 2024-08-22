@@ -1,5 +1,3 @@
-import {isAndroid} from "@headlessui/react/dist/utils/platform.js";
-
 export const formatMessageDateLong = (date) => {
     const now = new Date();
     const inputDate = new Date(date);
