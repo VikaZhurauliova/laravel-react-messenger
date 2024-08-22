@@ -4,11 +4,15 @@ import {
     PhotoIcon,
     FaceSmileIcon,
     HandThumbUpIcon,
-    PaperAirplaneIcon, XCircleIcon,
+    PaperAirplaneIcon,
+    XCircleIcon,
 } from "@heroicons/react/24/solid/index.js";
 import NewMessageInput from "./NewMessageInput";
 import EmojiPicker from "emoji-picker-react";
-import {Popover, Transition} from "@headlessui/react";
+import {Popover} from "@headlessui/react";
+import { isAudio, isImage } from "@/helpers.jsx";
+import AttachmentPreview from "@/Components/App/AttachmentPreview.jsx";
+import CustomAudioPlayer from "@/Components/App/CustomAudioPlayer.jsx";
 
 const MessageInput = ({ conversation = null}) => {
     const [newMessage, setNewMessage] = useState("");
@@ -26,6 +30,7 @@ const MessageInput = ({ conversation = null}) => {
                 url: URL.createObjectURL(file),
             };
         });
+        ev.target.value = null;
 
         setChosenFiles((prevFiles) => {
             return [...prevFiles, ...updatedFiles];
@@ -36,7 +41,7 @@ const MessageInput = ({ conversation = null}) => {
         if(messageSending) {
             return;
         }
-        if (newMessage.trim() === "") {
+        if (newMessage.trim() === "" || chosenFiles.length === 0) {
             setInputErrorMessage("Please provide a message or upload attachments.");
 
             setTimeout(() => {
