@@ -162,7 +162,7 @@ function Home({ selectedConversation = null, messages = null }) {
                                         <MessageItem
                                             key={message.id}
                                             message={message}
-                                            onAttachmentClick = {onAttachmentClick}
+                                            attachmentClick = {onAttachmentClick}
                                         />
                                     ))}
                                 </div>
@@ -171,6 +171,7 @@ function Home({ selectedConversation = null, messages = null }) {
                     <MessageInput conversation={selectedConversation} />
                 </>
             )}
+
             {previewAttachment.attachments && (
                 <AttachmentPreviewModal
                     attachments={previewAttachment.attachments}

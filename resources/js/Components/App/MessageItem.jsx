@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import React from "react";
 import UserAvatar from "./UserAvatar";
 import  { formatMessageDateLong } from "@/helpers";
-import MessageAttachments from "@/Components/App/MessageAttachments.jsx";
+import MessageAttachments from "./MessageAttachments.jsx";
 
 const MessageItem = ({message, attachmentClick}) => {
     const currentUser = usePage().props.auth.user;

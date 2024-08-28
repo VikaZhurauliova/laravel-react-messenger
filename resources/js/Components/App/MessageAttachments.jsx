@@ -47,8 +47,7 @@ const MessageAttachments = ({ attachments, attachmentClick}) => {
                                     <PlayCircleIcon className="z-20 absolute w-16 h-16 text-white opacity-70" />
                                     <div className="absolute left-0 top-0 w-full h-full bg-black/50 z-10">
                                     </div>
-                                    <video src={attachment.url}>
-                                    </video>
+                                    <video src={attachment.url}></video>
                                 </div>
                             )}
                             {isAudio(attachment) && (

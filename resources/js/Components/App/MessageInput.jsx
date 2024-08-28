@@ -30,6 +30,7 @@ const MessageInput = ({ conversation = null}) => {
                 url: URL.createObjectURL(file),
             };
         });
+
         ev.target.value = null;
 
         setChosenFiles((prevFiles) => {
@@ -41,7 +42,7 @@ const MessageInput = ({ conversation = null}) => {
         if(messageSending) {
             return;
         }
-        if (newMessage.trim() === "" || chosenFiles.length === 0) {
+        if (newMessage.trim() === "" && chosenFiles.length === 0) {
             setInputErrorMessage("Please provide a message or upload attachments.");
 
             setTimeout(() => {
@@ -71,11 +72,15 @@ const MessageInput = ({ conversation = null}) => {
                 setUploadProgress(progress);
             }
         }).then((response) => {
+            console.log('Server response:', response); // Добавлено для отладки
+
             setNewMessage("");
             setMessageSending(false);
             setUploadProgress(0);
             setChosenFiles([])
         }).catch((error) => {
+            console.error('Error:', error.response); // Добавлено для отладки
+
             setMessageSending(false);
             setChosenFiles([]);
             const message = error?.response?.data?.message;
@@ -140,15 +145,15 @@ const MessageInput = ({ conversation = null}) => {
                         <span className="hidden sm:inline">Send</span>
                     </button>
                 </div>
+                {inputErrorMessage && (
+                    <p className="text-xs text-red-400">{inputErrorMessage}</p>
+                )}
                 {!!uploadProgress && (
                     <progress
                         className="progress progress-info w-full"
                         value={uploadProgress}
                         max="100"
                     ></progress>
-                )}
-                {inputErrorMessage && (
-                    <p className="text-xs text-red-400">{inputErrorMessage}</p>
                 )}
                 <div className="flex flex-wrap gap-1 mt-2">
                     {chosenFiles.map((file) => (
@@ -190,7 +195,6 @@ const MessageInput = ({ conversation = null}) => {
                             >
                                 <XCircleIcon className="w-6" />
                             </button>
-
                         </div>
                     ))}
                 </div>

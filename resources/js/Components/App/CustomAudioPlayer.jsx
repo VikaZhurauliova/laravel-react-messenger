@@ -1,4 +1,4 @@
-import {PaperClipIcon, PauseCircleIcon, PlayCircleIcon} from "@heroicons/react/24/solid";
+import {PauseCircleIcon, PlayCircleIcon} from "@heroicons/react/24/solid";
 import React, { useRef, useState } from "react";
 
 const CustomAudioPlayer = ({ file, showVolume = true}) => {
@@ -52,7 +52,7 @@ const CustomAudioPlayer = ({ file, showVolume = true}) => {
                 onLoadedMetadata={handleLoadedMetadata}
                 className="hidden"
             />
-            <button>
+            <button onClick={togglePlayPause}>
                 {isPlaying && <PauseCircleIcon className="w-6 text-gray-400" />}
                 {!isPlaying && <PlayCircleIcon className="w-6 text-gray-400" />}
             </button>
