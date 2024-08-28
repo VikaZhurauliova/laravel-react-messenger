@@ -19,6 +19,7 @@ export default function AttachmentPreviewModal({
     const previewableAttachments = useMemo(() => {
         return attachments.filter((attachment) => isPreviewable(attachment));
     }, [attachments]);
+
     const attachment = useMemo(() => {
         return previewableAttachments[currentIndex];
     }, [attachments, currentIndex]);
