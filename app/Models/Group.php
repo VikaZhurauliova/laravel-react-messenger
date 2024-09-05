@@ -42,6 +42,11 @@ class Group extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function lastMessage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'last_message_id');
+    }
+
     /**
      * @param User $user
      * @return mixed

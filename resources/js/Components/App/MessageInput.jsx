@@ -111,7 +111,7 @@ const MessageInput = ({ conversation = null}) => {
     };
 
     const recordedAudioReady = (file, url) => {
-        setChosenFiles((prevFiles) => [...prevFiles, { file, url}]);
+        setChosenFiles((prevFiles) => [...prevFiles, { file, url }]);
     };
 
     return (
