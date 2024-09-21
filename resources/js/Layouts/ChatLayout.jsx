@@ -4,6 +4,7 @@ import { PencilSquareIcon } from "@heroicons/react/24/solid/index.js";
 import TextInput from "@/Components/TextInput.jsx";
 import ConversationItem from "@/Components/App/ConversationItem.jsx";
 import {useEventBus} from "@/EventBus.jsx";
+import GroupModal from "@/Components/App/GroupModal.jsx";
 
 const ChatLayout = ({ children }) => {
     const page = usePage();
@@ -12,6 +13,7 @@ const ChatLayout = ({ children }) => {
     const [onlineUsers, setOnlineUsers] = useState({});
     const [localConversations, setLocalConversations] = useState([]);
     const [sortedConversations, setSortedConversations] = useState([]);
+    const [showGroupModal, setShowGroupModal] = useState(false);
     const { on } = useEventBus();
 
     const isUserOnline = (userId) => onlineUsers[userId];
@@ -143,7 +145,10 @@ const ChatLayout = ({ children }) => {
                             className="tooltip tooltip-left"
                             data-tip="Create new Group"
                         >
-                            <button className="text-gray-400 hover:text-gray-200">
+                            <button
+                                onClick={ev => setShowGroupModal(true)}
+                                className="text-gray-400 hover:text-gray-200"
+                            >
                                 <PencilSquareIcon className="w-4 h-4 inline-block ml-2"/>
                             </button>
                         </div>
@@ -172,6 +177,10 @@ const ChatLayout = ({ children }) => {
                     {children}
                 </div>
             </div>
+            <GroupModal
+                show={showGroupModal}
+                onClose={() => setShowGroupModal(false)}
+            />
         </>
     );
 };
