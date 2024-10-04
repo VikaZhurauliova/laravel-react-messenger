@@ -7,9 +7,11 @@ import {
     ShieldCheckIcon,
     UserIcon
 } from "@heroicons/react/24/solid/index.js";
+import {useEventBus} from "@/EventBus.jsx";
 
 
 export default function UserOptionsDropdown({conversation}) {
+    const {emit} = useEventBus();
     const changeUserRole = () => {
         console.log("change user role");
         if (!conversation.is_user) {
@@ -19,6 +21,7 @@ export default function UserOptionsDropdown({conversation}) {
         axios
             .post(route("user.changeRole", conversation.id))
             .then((res) => {
+                emit("toast.show", res.data.message)
                 console.log(res.data)
             })
             .catch((err) => {
@@ -33,8 +36,9 @@ export default function UserOptionsDropdown({conversation}) {
         }
 
         axios
-            .post(route("user.blockUbblock", conversation.id))
+            .post(route("user.blockUnblock", conversation.id))
             .then((res) => {
+                emit("toast.show", res.data.message)
                 console.log(res.data)
             })
             .catch((err) => {
