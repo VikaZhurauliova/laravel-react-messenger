@@ -4,15 +4,19 @@ import UserAvatar from "./UserAvatar";
 import GroupAvatar from "./GroupAvatar";
 import GroupDescriptionPopover from "@/Components/App/GroupDescriptionPopover.jsx";
 import GroupUsersPopover from "@/Components/App/GroupUsersPopover.jsx";
+import {useEventBus} from "@/EventBus.jsx";
 
 const ConversationHeader = ({selectedConversation}) => {
     const authUser = usePage().props.auth.user;
+    const { emit } = useEventBus();
     const onDeleteGroup = () => {
         if (!window.confirm('Are you sure you want to delete this group?')) {
             return;
         }
 
-        axios.delete(route('group.destroy', selectedConversation.id)).then(() => {
+        axios.delete(route('group.destroy', selectedConversation.id))
+            .then((res) => {
+                emit("toast.show", res.data.message);
             console.log(res)
         }).catch((err) => {
             console.log(err);
